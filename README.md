@@ -1,70 +1,181 @@
-# Getting Started with Create React App
+Siap 🚀 aku buatin kamu file **README.md** yang rapi, terstruktur, dan gampang dipahami untuk belajar **React Basic** (Conditional, Data, Event, Logical & Operator).
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+---
 
-## Available Scripts
+## 📘 README.md — Belajar React Dasar
 
-In the project directory, you can run:
+# Belajar React Dasar
 
-### `npm start`
+Repository ini berisi catatan dan praktik dasar **React.js**, meliputi:
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- Conditional Rendering
+- Handling Data (props & state)
+- Event Handling
+- Logical & Operator di JSX
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+---
 
-### `npm test`
+## 📦 Persiapan Project
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+1. Install Node.js dan npm/yarn
+2. Buat project React:
+   ```bash
+   npx create-react-app project-basic
+   cd project-basic
+   npm start
+   ```
 
-### `npm run build`
+````
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+3. Semua kode ada di folder `src/`.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+---
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## 1️⃣ Conditional Rendering
 
-### `npm run eject`
+Conditional digunakan untuk menampilkan komponen berdasarkan kondisi.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### Contoh
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+```jsx
+function MadeGoal() {
+  return <h1>GOAL!</h1>;
+}
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+function MissedGoal() {
+  return <h1>MISSED!</h1>;
+}
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+function Goal(props) {
+  const isGoal = props.isGoal;
+  if (isGoal) {
+    return <MadeGoal />;
+  }
+  return <MissedGoal />;
+}
 
-## Learn More
+export default function App() {
+  return (
+    <div>
+      <Goal isGoal={true} />
+      <Goal isGoal={false} />
+    </div>
+  );
+}
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### Hasil:
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+* `isGoal={true}` → GOAL!
+* `isGoal={false}` → MISSED!
 
-### Code Splitting
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+## 2️⃣ Handling Data (Props & State)
 
-### Analyzing the Bundle Size
+Data bisa dikirim menggunakan **props** atau disimpan di **state**.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+### Props
 
-### Making a Progressive Web App
+```jsx
+function Product(props) {
+  return <p>{props.name} - {props.price}</p>;
+}
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+export default function App() {
+  return (
+    <div>
+      <Product name="Kopi" price="Rp 15.000" />
+      <Product name="Teh" price="Rp 10.000" />
+    </div>
+  );
+}
+```
 
-### Advanced Configuration
+### State
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+```jsx
+import { useState } from "react";
 
-### Deployment
+export default function Counter() {
+  const [count, setCount] = useState(0);
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+  return (
+    <div>
+      <p>Jumlah: {count}</p>
+      <button onClick={() => setCount(count + 1)}>Tambah</button>
+    </div>
+  );
+}
+```
 
-### `npm run build` fails to minify
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## 3️⃣ Event Handling
+
+Event digunakan untuk menangani interaksi user (klik, input, dll).
+
+```jsx
+function ButtonClick() {
+  function handleClick() {
+    alert("Tombol diklik!");
+  }
+
+  return <button onClick={handleClick}>Klik Saya</button>;
+}
+```
+
+Atau dengan **arrow function**:
+
+```jsx
+<button onClick={() => alert("Hello React!")}>Klik</button>
+```
+
+---
+
+## 4️⃣ Logical & Operator di JSX
+
+### AND (`&&`)
+
+Hanya tampil jika kondisi benar.
+
+```jsx
+const isLoggedIn = true;
+return <div>{isLoggedIn && <p>Selamat datang!</p>}</div>;
+```
+
+### OR (`||`)
+
+Gunakan nilai default jika kondisi salah.
+
+```jsx
+const username = "";
+return <p>{username || "Guest"}</p>;
+```
+
+### Ternary (`? :`)
+
+Ringkas dari `if else`.
+
+```jsx
+const isOnline = false;
+return <p>{isOnline ? "Online" : "Offline"}</p>;
+```
+
+---
+
+## 📌 Ringkasan
+
+* **Conditional** → Menentukan tampilan berdasarkan kondisi (`if`, `ternary`, `&&`).
+* **Data** → Props (dari luar) dan State (dari dalam komponen).
+* **Event** → Menangani aksi user (`onClick`, `onChange`, dll).
+* **Logical & Operator** → Gunakan `&&`, `||`, dan `? :` untuk logika ringkas di JSX.
+
+---
+
+## 🚀 Next Step
+
+* Belajar **Looping JSX** (`map`) untuk menampilkan list data.
+* Belajar **Form & Input** di React.
+* Latihan project kecil: To-do List, Counter, atau Conditional Form.
+````
